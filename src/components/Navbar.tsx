@@ -25,6 +25,19 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+  
   // Close mobile menu when clicking a nav item
   const handleNavClick = () => {
     setIsMenuOpen(false);
@@ -65,7 +78,7 @@ const Navbar: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-foreground p-2"
+            className="md:hidden text-foreground p-2 z-50"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -80,6 +93,7 @@ const Navbar: React.FC = () => {
           "md:hidden fixed inset-0 z-40 bg-white transition-transform duration-300 ease-in-out transform pt-20",
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         )}
+        style={{ opacity: isMenuOpen ? 1 : 0, visibility: isMenuOpen ? 'visible' : 'hidden' }}
       >
         <nav className="flex flex-col items-center space-y-6 p-4">
           {navItems.map((item) => (
