@@ -12,24 +12,28 @@ import Footer from '@/components/Footer';
 const Index: React.FC = () => {
   // Handle smooth scroll for navigation
   useEffect(() => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const target = document.querySelector(this.getAttribute('href') || "");
-        if (!target) return;
-        
-        target.scrollIntoView({
-          behavior: 'smooth'
-        });
+    const handleClick = function(e: Event) {
+      e.preventDefault();
+      
+      const anchor = this as HTMLAnchorElement;
+      const href = anchor.getAttribute('href');
+      if (!href) return;
+      
+      const target = document.querySelector(href);
+      if (!target) return;
+      
+      target.scrollIntoView({
+        behavior: 'smooth'
       });
+    };
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', handleClick);
     });
     
     return () => {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', function(e) {
-          e.preventDefault();
-        });
+        anchor.removeEventListener('click', handleClick);
       });
     };
   }, []);

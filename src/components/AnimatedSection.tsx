@@ -23,16 +23,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
     const section = sectionRef.current;
     if (!section) return;
     
-    // Initial check on component mount
-    checkIfVisible();
-    
-    // Check on scroll
-    const handleScroll = () => {
-      checkIfVisible();
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    
+    // Define the checkIfVisible function before using it
     function checkIfVisible() {
       const rect = section.getBoundingClientRect();
       const isVisible = (
@@ -54,6 +45,17 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
         section.style.opacity = '0';
       }
     }
+    
+    // Define handleScroll after checkIfVisible to avoid reference error
+    const handleScroll = () => {
+      checkIfVisible();
+    };
+    
+    // Initial check on component mount
+    checkIfVisible();
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
