@@ -59,8 +59,10 @@ const Navbar: React.FC = () => {
             href="#hero" 
             className="flex items-center text-primary font-bold text-xl"
           >
-            <Leaf className="w-6 h-6 mr-2" strokeWidth={2.5} />
-            <span>GreenIT</span>
+            {/* <Leaf className="w-6 h-6 mr-2" strokeWidth={2.5} /> */}
+            <img src="/QPR.svg" alt="Company Logo" className="w-20 h-20 mr-2" />
+
+            {/* <span>GreenIT</span> */}
           </a>
           
           {/* Desktop Navigation */}
