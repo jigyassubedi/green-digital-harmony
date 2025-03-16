@@ -14,6 +14,10 @@ const AboutSection: React.FC = () => {
   return (
     <section id="about" className="py-20 bg-background">
       <div className="section-container">
+        <div className="text-center mb-12">
+          <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">About Us</h3>
+        </div>
+        
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <AnimatedSection className="order-2 md:order-1">
             <div className="relative">
@@ -37,9 +41,6 @@ const AboutSection: React.FC = () => {
           
           <AnimatedSection className="order-1 md:order-2">
             <div>
-              <div className="inline-block px-3 py-1 rounded-full bg-secondary text-primary font-medium text-sm mb-4">
-                About Us
-              </div>
               <h2 className="section-title">
                 Leading the Way in <span className="text-primary">Sustainable IT</span>
               </h2>

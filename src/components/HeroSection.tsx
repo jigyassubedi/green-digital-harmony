@@ -30,8 +30,8 @@ const HeroSection: React.FC = () => {
       <div className="section-container z-10 pt-20">
         <div className="text-center max-w-4xl mx-auto">
           <AnimatedSection animation="fade-down" className="mb-6">
-            <div className="inline-block px-3 py-1 rounded-full bg-secondary text-primary font-medium text-sm mb-4">
-              Sustainable IT Solutions
+            <div className="text-center">
+              <h3 className="text-white font-medium text-sm uppercase tracking-wider mb-2">Sustainable IT Solutions</h3>
             </div>
           </AnimatedSection>
           
