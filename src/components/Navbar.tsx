@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
-import { Leaf, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const navItems = [
   { label: 'About', href: '#about' },
@@ -14,6 +15,7 @@ const navItems = [
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
   
   // Handle scroll event to update navbar styles
   useEffect(() => {
@@ -27,7 +29,7 @@ const Navbar: React.FC = () => {
   
   // Prevent body scroll when menu is open
   useEffect(() => {
-    if (isMenuOpen) {
+    if (isMenuOpen && isMobile) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -36,7 +38,7 @@ const Navbar: React.FC = () => {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isMobile]);
   
   // Close mobile menu when clicking a nav item
   const handleNavClick = () => {
@@ -77,7 +79,7 @@ const Navbar: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-foreground p-2 z-50"
+            className="md:hidden text-foreground p-2 z-50 relative"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -86,7 +88,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile Navigation - Updated to slide from right and cover less than half screen */}
+      {/* Mobile Navigation */}
       <div 
         className={cn(
           "md:hidden fixed top-0 right-0 z-40 h-full w-[40%] bg-white shadow-lg transition-all duration-300 ease-in-out",
