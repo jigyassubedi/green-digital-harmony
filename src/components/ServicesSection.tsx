@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Server, Cloud, HardDrive, Cpu, Shield, Lightbulb } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
@@ -39,15 +38,15 @@ const services = [
 const ServicesSection: React.FC = () => {
   return (
     <section id="services" className="py-10 bg-accent/30">
-      <div className="section-container">
+      <div className="section-container max-w-6xl mx-auto px-4">
+      <div className="flex justify-center items-center w-full mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
+           Our Services
+          </h1>
+        </div>
         <AnimatedSection className="text-center mb-8">
-          <div className="text-center">
-            <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">Our Services</h3>
-          </div>
-          <h2 className="section-title">
-            Sustainable IT Solutions for the Modern Business
-          </h2>
-          <p className="section-subtitle">
+          {/* <h2 className="section-title">Sustainable IT Solutions for the Modern Business</h2> */}
+          <p className="section-subtitle mx-auto max-w-3xl">
             We offer a comprehensive range of services designed to help your business thrive in the digital age while minimizing environmental impact.
           </p>
         </AnimatedSection>
@@ -66,7 +65,7 @@ const ServicesSection: React.FC = () => {
               <p className="text-muted-foreground mb-4">{service.description}</p>
               <a 
                 href="#contact" 
-                className="text-primary font-medium inline-flex items-center hover:underline"
+                className="text-primary font-medium inline-flex items-center hover:underline group"
               >
                 Learn More
                 <svg 

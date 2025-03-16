@@ -47,14 +47,17 @@ const WorksSection: React.FC = () => {
   return (
     <section id="works" className="py-10 bg-background">
       <div className="section-container">
+      <div className="flex justify-center items-center w-full mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
+           Our Projects
+          </h1>
+        </div>
         <AnimatedSection className="text-center mb-8">
-          <div className="text-center">
-            <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">Our Projects</h3>
-          </div>
-          <h2 className="section-title">
+          
+          {/* <h2 className="section-title">
             Sustainable Solutions in Action
-          </h2>
-          <p className="section-subtitle">
+          </h2> */}
+          <p className="section-subtitle mx-auto max-w-3xl">
             Explore our portfolio of successful implementations that demonstrate the power of green IT solutions in real-world scenarios.
           </p>
         </AnimatedSection>

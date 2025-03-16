@@ -31,14 +31,17 @@ const BlogSection: React.FC = () => {
   return (
     <section id="blog" className="py-10 bg-accent/30">
       <div className="section-container">
+      <div className="flex justify-center items-center w-full mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
+           Our Blog
+          </h1>
+        </div>
         <AnimatedSection className="text-center mb-8">
-          <div className="text-center">
-            <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">Our Blog</h3>
-          </div>
-          <h2 className="section-title">
+          
+          {/* <h2 className="section-title">
             Latest Insights & Trends
-          </h2>
-          <p className="section-subtitle">
+          </h2> */}
+          <p className="section-subtitle mx-auto max-w-3xl">
             Stay updated with the latest news and insights in sustainable IT and green energy solutions.
           </p>
         </AnimatedSection>

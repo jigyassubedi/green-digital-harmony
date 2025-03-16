@@ -38,14 +38,17 @@ const ContactSection: React.FC = () => {
   return (
     <section id="contact" className="py-10 bg-background">
       <div className="section-container">
-        <AnimatedSection className="text-center mb-8">
-          <div className="text-center">
-            <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">Get In Touch</h3>
-          </div>
-          <h2 className="section-title">
+        <AnimatedSection className="text-center mb-4">
+        <div className="flex justify-center items-center w-full mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
+           Get In Touch
+          </h1>
+        </div>
+          
+          {/* <h2 className="section-title">
             Let's Create a Greener Digital Future Together
-          </h2>
-          <p className="section-subtitle">
+          </h2> */}
+          <p className="section-subtitle mx-auto max-w-3xl">
             Have questions about our sustainable IT solutions? Want to learn how we can help your business reduce its carbon footprint? Reach out to us today.
           </p>
         </AnimatedSection>

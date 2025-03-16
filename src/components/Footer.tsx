@@ -12,13 +12,16 @@ const Footer: React.FC = () => {
   
   return (
     <footer className="bg-foreground text-white pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-10">
+          
+          {/* Logo and About Section */}
           <div>
-            <div className="flex items-center text-white mb-4">
-              <Leaf className="w-6 h-6 mr-2" strokeWidth={2.5} />
-              <span className="text-xl font-bold">GreenIT</span>
+            <div className="flex items-center text-white">
+              <img src="/QPR.svg" alt="Company Logo" className="w-20 h-20 mr-3 -mt-4" />
+              
             </div>
+            <p><span className="text-l font-bold text-primary">Center For Quality Practices & Research Pvt. Ltd.</span></p>
             <p className="text-white/70 mb-6">
               Leading the transformation to a sustainable digital future through innovative IT solutions powered by clean energy.
             </p>
@@ -94,18 +97,34 @@ const Footer: React.FC = () => {
           
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
-            <address className="not-italic text-white/70 space-y-3">
-              <p>123 Green Avenue, Eco Park</p>
-              <p>San Francisco, CA 94107</p>
-              <p>info@greenit.com</p>
-              <p>+1 (123) 456-7890</p>
-            </address>
+            <address className="not-italic text-white/70 space-y-4">
+  <p>
+    <a 
+      href="https://maps.app.goo.gl/PTUHL9aFNVE8PU1b7" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="hover:text-primary transition-colors"
+    >
+      Buddhanagar, Kathmandu
+    </a>
+  </p>
+  <p>
+    <a 
+      href="mailto:qualitypractices@outlook.com" 
+      className="hover:text-primary transition-colors"
+    >
+      qualitypractices@outlook.com
+    </a>
+  </p>
+  <p>+977 985 144 4440</p>
+</address>
+
           </div>
         </div>
         
         <div className="border-t border-white/10 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/70 text-sm">
-            &copy; {new Date().getFullYear()} GreenIT. All rights reserved.
+            &copy; {new Date().getFullYear()} Center For Quality Practices & Pvt. Ltd. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-white/70 text-sm hover:text-primary">Privacy Policy</a>

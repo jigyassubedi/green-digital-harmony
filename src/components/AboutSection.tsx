@@ -13,16 +13,14 @@ const AboutSection: React.FC = () => {
   return (
     <section id="about" className="py-10 bg-background">
       <div className="section-container">
-<<<<<<< HEAD
-      <div className="text-center mb-8">
-          <h1 className="text-primary uppercase tracking-wider mb-2">About Us</h1>
-        </div>
-=======
-        <div className="text-center mb-8">
-          <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">About Us</h3>
-        </div>
         
->>>>>>> 7d869829b558ba656121d8a84b49f4a717980a76
+        {/* Centered and Bold About Us Title */}
+        <div className="flex justify-center items-center w-full mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
+            About Us
+          </h1>
+        </div>
+
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <AnimatedSection className="order-2 md:order-1">
             <div className="relative">
@@ -46,13 +44,9 @@ const AboutSection: React.FC = () => {
           
           <AnimatedSection className="order-1 md:order-2">
             <div>
-<<<<<<< HEAD
-              
-=======
->>>>>>> 7d869829b558ba656121d8a84b49f4a717980a76
-              <h2 className="section-title">
+              {/* <h2 className="section-title">
                 Leading the Way in <span className="text-primary">Sustainable IT</span>
-              </h2>
+              </h2> */}
               <p className="section-subtitle">
                 We are committed to revolutionizing the IT industry by integrating clean energy solutions with cutting-edge technology. Our mission is to help businesses reduce their carbon footprint while optimizing digital performance.
               </p>
