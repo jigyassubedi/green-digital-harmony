@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-foreground p-2 z-50 relative"
+            className="md:hidden text-foreground p-2 z-[100] relative"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -88,10 +88,10 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Improved with higher z-index and solid background */}
       <div 
         className={cn(
-          "md:hidden fixed top-0 right-0 z-40 h-full w-[40%] bg-white shadow-lg transition-all duration-300 ease-in-out",
+          "md:hidden fixed top-0 right-0 z-[60] h-full w-[40%] bg-white shadow-lg transition-all duration-300 ease-in-out",
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
@@ -111,10 +111,10 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Overlay backdrop when menu is open */}
+      {/* Overlay backdrop when menu is open - Increased z-index to ensure full coverage */}
       {isMenuOpen && (
         <div 
-          className="md:hidden fixed inset-0 z-30 bg-black/20 backdrop-blur-sm"
+          className="md:hidden fixed inset-0 z-[50] bg-black/60 backdrop-blur-sm"
           onClick={() => setIsMenuOpen(false)}
         />
       )}
