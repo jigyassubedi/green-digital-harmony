@@ -75,7 +75,7 @@
 
 @layer components {
   .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12;
   }
   
   .section-title {
@@ -83,7 +83,7 @@
   }
   
   .section-subtitle {
-    @apply text-lg text-muted-foreground mb-10 max-w-3xl;
+    @apply text-lg text-muted-foreground mb-6 max-w-3xl;
   }
   
   .btn-primary {

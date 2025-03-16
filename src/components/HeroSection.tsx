@@ -29,7 +29,15 @@ const HeroSection: React.FC = () => {
       
       <div className="section-container z-10 pt-20">
         <div className="text-center max-w-4xl mx-auto">
+<<<<<<< HEAD
           
+=======
+          <AnimatedSection animation="fade-down" className="mb-6">
+            <div className="text-center">
+              <h3 className="text-white font-medium text-sm uppercase tracking-wider mb-2">Sustainable IT Solutions</h3>
+            </div>
+          </AnimatedSection>
+>>>>>>> 7d869829b558ba656121d8a84b49f4a717980a76
           
           <AnimatedSection animation="fade-up" delay={200}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white ">

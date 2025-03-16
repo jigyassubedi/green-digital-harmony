@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
-import { Leaf, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const navItems = [
   { label: 'About', href: '#about' },
@@ -14,6 +15,7 @@ const navItems = [
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
   
   // Handle scroll event to update navbar styles
   useEffect(() => {
@@ -27,7 +29,7 @@ const Navbar: React.FC = () => {
   
   // Prevent body scroll when menu is open
   useEffect(() => {
-    if (isMenuOpen) {
+    if (isMenuOpen && isMobile) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -36,7 +38,7 @@ const Navbar: React.FC = () => {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isMobile]);
   
   // Close mobile menu when clicking a nav item
   const handleNavClick = () => {
@@ -59,10 +61,7 @@ const Navbar: React.FC = () => {
             href="#hero" 
             className="flex items-center text-primary font-bold text-xl"
           >
-            {/* <Leaf className="w-6 h-6 mr-2" strokeWidth={2.5} /> */}
             <img src="/QPR.svg" alt="Company Logo" className="w-20 h-20 mr-2" />
-
-            {/* <span>GreenIT</span> */}
           </a>
           
           {/* Desktop Navigation */}
@@ -80,7 +79,7 @@ const Navbar: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-foreground p-2 z-50"
+            className="md:hidden text-foreground p-2 z-[100] relative"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -89,27 +88,36 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Improved with higher z-index and solid background */}
       <div 
         className={cn(
-          "md:hidden fixed inset-0 z-40 bg-white transition-transform duration-300 ease-in-out transform pt-20",
+          "md:hidden fixed top-0 right-0 z-[60] h-full w-[40%] bg-white shadow-lg transition-all duration-300 ease-in-out",
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         )}
-        style={{ opacity: isMenuOpen ? 1 : 0, visibility: isMenuOpen ? 'visible' : 'hidden' }}
       >
-        <nav className="flex flex-col items-center space-y-6 p-4">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-              onClick={handleNavClick}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <div className="pt-24 px-4">
+          <nav className="flex flex-col items-start space-y-6">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                onClick={handleNavClick}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </div>
+      
+      {/* Overlay backdrop when menu is open - Increased z-index to ensure full coverage */}
+      {isMenuOpen && (
+        <div 
+          className="md:hidden fixed inset-0 z-[50] bg-black/60 backdrop-blur-sm"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
     </header>
   );
 };

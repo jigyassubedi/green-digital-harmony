@@ -45,11 +45,11 @@ const WorksSection: React.FC = () => {
   const [activeProject, setActiveProject] = useState<number | null>(null);
   
   return (
-    <section id="works" className="py-20 bg-background">
+    <section id="works" className="py-10 bg-background">
       <div className="section-container">
-        <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block px-3 py-1 rounded-full bg-secondary text-primary font-medium text-sm mb-4">
-            Our Projects
+        <AnimatedSection className="text-center mb-8">
+          <div className="text-center">
+            <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">Our Projects</h3>
           </div>
           <h2 className="section-title">
             Sustainable Solutions in Action
