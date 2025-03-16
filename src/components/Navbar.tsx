@@ -59,10 +59,7 @@ const Navbar: React.FC = () => {
             href="#hero" 
             className="flex items-center text-primary font-bold text-xl"
           >
-            {/* <Leaf className="w-6 h-6 mr-2" strokeWidth={2.5} /> */}
             <img src="/QPR.svg" alt="Company Logo" className="w-20 h-20 mr-2" />
-
-            {/* <span>GreenIT</span> */}
           </a>
           
           {/* Desktop Navigation */}
@@ -89,27 +86,36 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Updated to slide from right and cover less than half screen */}
       <div 
         className={cn(
-          "md:hidden fixed inset-0 z-40 bg-white transition-transform duration-300 ease-in-out transform pt-20",
+          "md:hidden fixed top-0 right-0 z-40 h-full w-[40%] bg-white shadow-lg transition-all duration-300 ease-in-out",
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         )}
-        style={{ opacity: isMenuOpen ? 1 : 0, visibility: isMenuOpen ? 'visible' : 'hidden' }}
       >
-        <nav className="flex flex-col items-center space-y-6 p-4">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-              onClick={handleNavClick}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <div className="pt-24 px-4">
+          <nav className="flex flex-col items-start space-y-6">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                onClick={handleNavClick}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </div>
+      
+      {/* Overlay backdrop when menu is open */}
+      {isMenuOpen && (
+        <div 
+          className="md:hidden fixed inset-0 z-30 bg-black/20 backdrop-blur-sm"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
     </header>
   );
 };
