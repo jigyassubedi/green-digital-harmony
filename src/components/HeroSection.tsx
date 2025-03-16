@@ -29,14 +29,10 @@ const HeroSection: React.FC = () => {
       
       <div className="section-container z-10 pt-20">
         <div className="text-center max-w-4xl mx-auto">
-          <AnimatedSection animation="fade-down" className="mb-6">
-            <div className="inline-block px-3 py-1 rounded-full bg-secondary text-primary font-medium text-sm mb-4">
-              Sustainable IT Solutions
-            </div>
-          </AnimatedSection>
+          
           
           <AnimatedSection animation="fade-up" delay={200}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white shadow-sm">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white ">
               Powering the Digital World with 
               <span className="text-primary"> Clean Energy & Technology</span>
             </h1>
