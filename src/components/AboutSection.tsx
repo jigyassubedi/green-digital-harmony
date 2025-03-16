@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CheckCircle, Server, Cloud, Leaf, Lock } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
@@ -12,9 +11,9 @@ const stats = [
 
 const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-20 bg-background">
+    <section id="about" className="py-10 bg-background">
       <div className="section-container">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">About Us</h3>
         </div>
         
@@ -65,7 +64,7 @@ const AboutSection: React.FC = () => {
           </AnimatedSection>
         </div>
         
-        <AnimatedSection className="mt-20">
+        <AnimatedSection className="mt-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((stat, index) => (
               <div 

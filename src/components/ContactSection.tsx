@@ -36,9 +36,9 @@ const ContactSection: React.FC = () => {
   };
   
   return (
-    <section id="contact" className="py-20 bg-background">
+    <section id="contact" className="py-10 bg-background">
       <div className="section-container">
-        <AnimatedSection className="text-center mb-16">
+        <AnimatedSection className="text-center mb-8">
           <div className="text-center">
             <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">Get In Touch</h3>
           </div>

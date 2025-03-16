@@ -38,9 +38,9 @@ const services = [
 
 const ServicesSection: React.FC = () => {
   return (
-    <section id="services" className="py-20 bg-accent/30">
+    <section id="services" className="py-10 bg-accent/30">
       <div className="section-container">
-        <AnimatedSection className="text-center mb-16">
+        <AnimatedSection className="text-center mb-8">
           <div className="text-center">
             <h3 className="text-primary font-medium text-sm uppercase tracking-wider mb-2">Our Services</h3>
           </div>
