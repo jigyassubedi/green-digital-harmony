@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Server, Cloud, HardDrive, Cpu, Shield, Lightbulb } from 'lucide-react';
+import { Server, Cloud, HardDrive, Cpu, Shield, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import { Button } from '@/components/ui/button';
 import { 
@@ -10,7 +10,6 @@ import {
   CarouselNext, 
   CarouselPrevious 
 } from '@/components/ui/carousel';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const services = [
   {
