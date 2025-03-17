@@ -11,11 +11,11 @@ const stats = [
 
 const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-10 bg-background">
+    <section id="about" className="py-4 bg-background">
       <div className="section-container">
         
         {/* Centered and Bold About Us Title */}
-        <div className="flex justify-center items-center w-full mb-4">
+        <div className="flex justify-center items-center w-full mb-2">
           <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
             About Us
           </h1>
@@ -69,19 +69,23 @@ const AboutSection: React.FC = () => {
         </div>
         
         <AnimatedSection className="mt-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {stats.map((stat, index) => (
-              <div 
-                key={index} 
-                className="bg-secondary/50 rounded-lg p-6 card-hover"
-              >
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+  {stats.map((stat, index) => (
+    <div 
+      key={index} 
+      className="rounded-lg p-6 card-hover text-center"
+      style={{
+         background: 'linear-gradient(to right, #8FE0C3, #25A777)',
+      }}
+    >
+      <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+        {stat.value}
+      </div>
+      <div className="text-gray-100">{stat.label}</div> {/* Lightened text for contrast */}
+    </div>
+  ))}
+</div>
+
         </AnimatedSection>
       </div>
     </section>

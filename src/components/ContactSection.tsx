@@ -36,10 +36,10 @@ const ContactSection: React.FC = () => {
   };
   
   return (
-    <section id="contact" className="py-10 bg-background">
+    <section id="contact" className="py-4 bg-background">
       <div className="section-container">
-        <AnimatedSection className="text-center mb-4">
-        <div className="flex justify-center items-center w-full mb-4">
+        <AnimatedSection className="text-center mb-2">
+        <div className="flex justify-center items-center w-full mb-2">
           <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
            Get In Touch
           </h1>

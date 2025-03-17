@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
 import { Menu, X } from 'lucide-react';
@@ -39,19 +38,25 @@ const Navbar: React.FC = () => {
       document.body.style.overflow = '';
     };
   }, [isMenuOpen, isMobile]);
-  
-  // Close mobile menu when clicking a nav item
-  const handleNavClick = () => {
-    setIsMenuOpen(false);
+
+  // Smooth scrolling function
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 80; // Adjust for navbar height
+      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    }
+    
+    setIsMenuOpen(false); // Close menu after clicking
   };
-  
+
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300",
-        isScrolled 
-          ? "py-3 bg-white/80 backdrop-blur-lg shadow-md" 
-          : "py-5 bg-transparent"
+        "fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white shadow-md py-3"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,7 +66,7 @@ const Navbar: React.FC = () => {
             href="#hero" 
             className="flex items-center text-primary font-bold text-xl"
           >
-            <img src="/QPR.svg" alt="Company Logo" className="w-20 h-20 mr-2" />
+            <img src="/qpr-logo-nav.png" alt="Company Logo" className="w-16 h-16 mr-2" />
           </a>
           
           {/* Desktop Navigation */}
@@ -71,6 +76,7 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 className="text-foreground hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.label}
               </a>
@@ -88,7 +94,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile Navigation - Improved with higher z-index and solid background */}
+      {/* Mobile Navigation */}
       <div 
         className={cn(
           "md:hidden fixed top-0 right-0 z-[60] h-full w-[40%] bg-white shadow-lg transition-all duration-300 ease-in-out",
@@ -102,7 +108,7 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                onClick={handleNavClick}
+                onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.label}
               </a>
@@ -111,7 +117,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Overlay backdrop when menu is open - Increased z-index to ensure full coverage */}
+      {/* Overlay backdrop when menu is open */}
       {isMenuOpen && (
         <div 
           className="md:hidden fixed inset-0 z-[50] bg-black/60 backdrop-blur-sm"
