@@ -15,32 +15,38 @@ const services = [
   {
     title: 'Green Data Centers',
     description: 'Eco-friendly data centers powered by renewable energy sources, designed to minimize environmental impact while maximizing performance.',
-    icon: Server
+    icon: Server,
+    gradient: 'bg-gradient-to-r from-primary/5 to-primary/20'
   },
   {
     title: 'Cloud Computing & Energy Efficiency',
     description: 'Optimized cloud solutions that reduce energy consumption and carbon emissions while enhancing scalability and accessibility.',
-    icon: Cloud
+    icon: Cloud,
+    gradient: 'bg-gradient-to-r from-primary/10 to-primary/25'
   },
   {
     title: 'Sustainable IT Infrastructure',
     description: 'End-to-end IT infrastructure designed with sustainability in mind, from energy-efficient hardware to optimized network architecture.',
-    icon: HardDrive
+    icon: HardDrive,
+    gradient: 'bg-gradient-to-r from-primary/15 to-primary/30'
   },
   {
     title: 'AI & Automation for Energy Management',
     description: 'Smart systems that leverage AI to monitor and optimize energy usage in real-time, reducing waste and improving efficiency.',
-    icon: Cpu
+    icon: Cpu,
+    gradient: 'bg-gradient-to-r from-primary/20 to-primary/35'
   },
   {
     title: 'Cybersecurity & Eco-friendly Solutions',
     description: 'Comprehensive security solutions that protect your digital assets while adhering to sustainable IT practices.',
-    icon: Shield
+    icon: Shield,
+    gradient: 'bg-gradient-to-r from-primary/15 to-primary/30'
   },
   {
     title: 'Green IT Consulting',
     description: 'Expert guidance on implementing sustainable technology strategies that align with your business goals and environmental values.',
-    icon: Lightbulb
+    icon: Lightbulb,
+    gradient: 'bg-gradient-to-r from-primary/10 to-primary/25'
   }
 ];
 
@@ -89,7 +95,7 @@ const ServicesSection: React.FC = () => {
           </p>
         </AnimatedSection>
 
-        {/* Desktop View - Grid - Now using carousel too */}
+        {/* Desktop View - Carousel */}
         <div className="hidden md:block">
           <Carousel 
             setApi={setApi}
@@ -105,12 +111,12 @@ const ServicesSection: React.FC = () => {
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
                   <AnimatedSection 
                     delay={index * 100}
-                    className="bg-white rounded-lg p-6 shadow-md card-hover h-full"
+                    className={`rounded-lg p-6 shadow-md card-hover h-full ${service.gradient} backdrop-blur-sm border border-white/10`}
                   >
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4">
                       <service.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                    <h3 className="text-xl font-semibold mb-3 text-foreground">{service.title}</h3>
                     <p className="text-muted-foreground mb-4">{service.description}</p>
                     <a 
                       href="#contact" 
@@ -171,11 +177,11 @@ const ServicesSection: React.FC = () => {
             <CarouselContent>
               {services.map((service, index) => (
                 <CarouselItem key={index} className="basis-full">
-                  <div className="bg-white rounded-lg p-6 shadow-md h-full flex flex-col">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                  <div className={`rounded-lg p-6 shadow-md h-full flex flex-col ${service.gradient} backdrop-blur-sm border border-white/10`}>
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4">
                       <service.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                    <h3 className="text-xl font-semibold mb-3 text-foreground">{service.title}</h3>
                     <p className="text-muted-foreground mb-4">{service.description}</p>
                     <a 
                       href="#contact" 
