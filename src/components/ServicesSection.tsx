@@ -146,13 +146,13 @@ const ServicesSection: React.FC = () => {
               </CarouselPrevious>
 
               <div className="flex gap-2 items-center">
-                {services.map((_, index) => (
-                  <Button 
+                {Array.from({ length: Math.ceil(services.length / 3) }).map((_, index) => (
+                  <button 
                     key={index}
-                    variant="ghost"
-                    size="icon"
-                    className={`h-2 w-2 rounded-full p-0 bg-primary/40 ${index === current ? 'opacity-100 bg-primary' : 'opacity-50'}`}
-                    onClick={() => api?.scrollTo(index)}
+                    type="button"
+                    onClick={() => api?.scrollTo(index * 3)}
+                    className={`h-2 w-2 rounded-full ${current === index * 3 || current === index * 3 + 1 || current === index * 3 + 2 ? 'bg-primary' : 'bg-primary/40'}`}
+                    aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}
               </div>
@@ -212,12 +212,12 @@ const ServicesSection: React.FC = () => {
 
               <div className="flex gap-2 items-center">
                 {services.map((_, index) => (
-                  <Button 
+                  <button 
                     key={index}
-                    variant="ghost"
-                    size="icon"
-                    className={`h-2 w-2 rounded-full p-0 bg-primary/40 ${index === current ? 'opacity-100 bg-primary' : 'opacity-50'}`}
+                    type="button"
                     onClick={() => api?.scrollTo(index)}
+                    className={`h-2 w-2 rounded-full ${current === index ? 'bg-primary' : 'bg-primary/40'}`}
+                    aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}
               </div>
