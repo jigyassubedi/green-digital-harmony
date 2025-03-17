@@ -1,6 +1,16 @@
+
 import React from 'react';
 import { Server, Cloud, HardDrive, Cpu, Shield, Lightbulb } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
+import { Button } from '@/components/ui/button';
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from '@/components/ui/carousel';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const services = [
   {
@@ -36,22 +46,41 @@ const services = [
 ];
 
 const ServicesSection: React.FC = () => {
+  const [api, setApi] = React.useState<any>(null);
+  const [current, setCurrent] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) return;
+    
+    const onSelect = () => {
+      setCurrent(api.selectedScrollSnap());
+    };
+    
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
+    
+    return () => {
+      api.off("select", onSelect);
+      api.off("reInit", onSelect);
+    };
+  }, [api]);
+  
   return (
     <section id="services" className="py-4 bg-accent/30">
       <div className="section-container max-w-6xl mx-auto px-4">
-      <div className="flex justify-center items-center w-full mb-2">
+        <div className="flex justify-center items-center w-full mb-2">
           <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
-           Our Services
+            Our Services
           </h1>
         </div>
         <AnimatedSection className="text-center mb-8">
-          {/* <h2 className="section-title">Sustainable IT Solutions for the Modern Business</h2> */}
           <p className="section-subtitle mx-auto max-w-3xl">
             We offer a comprehensive range of services designed to help your business thrive in the digital age while minimizing environmental impact.
           </p>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Desktop View - Grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <AnimatedSection 
               key={index} 
@@ -79,6 +108,71 @@ const ServicesSection: React.FC = () => {
               </a>
             </AnimatedSection>
           ))}
+        </div>
+
+        {/* Mobile View - Carousel */}
+        <div className="md:hidden">
+          <Carousel 
+            setApi={setApi}
+            className="w-full max-w-md mx-auto"
+            opts={{ loop: true, align: "center" }}
+          >
+            <CarouselContent>
+              {services.map((service, index) => (
+                <CarouselItem key={index} className="basis-full">
+                  <div className="bg-white rounded-lg p-6 shadow-md h-full flex flex-col">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                      <service.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                    <p className="text-muted-foreground mb-4">{service.description}</p>
+                    <a 
+                      href="#contact" 
+                      className="text-primary font-medium inline-flex items-center hover:underline group mt-auto"
+                    >
+                      Learn More
+                      <svg 
+                        className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <div className="flex items-center justify-center gap-4 mt-6">
+              <CarouselPrevious 
+                variant="outline" 
+                className="relative bg-primary text-white hover:bg-primary/90 border-none left-0 translate-y-0 static"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </CarouselPrevious>
+
+              <div className="flex gap-2 items-center">
+                {services.map((_, index) => (
+                  <Button 
+                    key={index}
+                    variant="ghost"
+                    size="icon"
+                    className={`h-2 w-2 rounded-full p-0 bg-primary/40 ${index === current ? 'opacity-100 bg-primary' : 'opacity-50'}`}
+                    onClick={() => api?.scrollTo(index)}
+                  />
+                ))}
+              </div>
+
+              <CarouselNext 
+                variant="outline" 
+                className="relative bg-primary text-white hover:bg-primary/90 border-none right-0 translate-y-0 static" 
+              >
+                <ChevronRight className="h-5 w-5" />
+              </CarouselNext>
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>
