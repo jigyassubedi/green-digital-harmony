@@ -64,6 +64,17 @@ const ServicesSection: React.FC = () => {
     };
   }, [api]);
   
+  // Auto-play functionality
+  React.useEffect(() => {
+    if (!api) return;
+    
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 5000); // Change slide every 5 seconds
+    
+    return () => clearInterval(interval);
+  }, [api]);
+  
   return (
     <section id="services" className="py-4 bg-accent/30">
       <div className="section-container max-w-6xl mx-auto px-4">
@@ -78,35 +89,76 @@ const ServicesSection: React.FC = () => {
           </p>
         </AnimatedSection>
 
-        {/* Desktop View - Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <AnimatedSection 
-              key={index} 
-              delay={index * 100}
-              className="bg-white rounded-lg p-6 shadow-md card-hover"
-            >
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <service.icon className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-              <p className="text-muted-foreground mb-4">{service.description}</p>
-              <a 
-                href="#contact" 
-                className="text-primary font-medium inline-flex items-center hover:underline group"
+        {/* Desktop View - Grid - Now using carousel too */}
+        <div className="hidden md:block">
+          <Carousel 
+            setApi={setApi}
+            className="w-full"
+            opts={{ 
+              loop: true, 
+              align: "start",
+              slidesToScroll: 3,
+            }}
+          >
+            <CarouselContent>
+              {services.map((service, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
+                  <AnimatedSection 
+                    delay={index * 100}
+                    className="bg-white rounded-lg p-6 shadow-md card-hover h-full"
+                  >
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                      <service.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                    <p className="text-muted-foreground mb-4">{service.description}</p>
+                    <a 
+                      href="#contact" 
+                      className="text-primary font-medium inline-flex items-center hover:underline group"
+                    >
+                      Learn More
+                      <svg 
+                        className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </AnimatedSection>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <div className="flex items-center justify-center gap-4 mt-6">
+              <CarouselPrevious 
+                variant="outline" 
+                className="relative bg-primary text-white hover:bg-primary/90 border-none left-0 translate-y-0 static"
               >
-                Learn More
-                <svg 
-                  className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-            </AnimatedSection>
-          ))}
+                <ChevronLeft className="h-5 w-5" />
+              </CarouselPrevious>
+
+              <div className="flex gap-2 items-center">
+                {services.map((_, index) => (
+                  <Button 
+                    key={index}
+                    variant="ghost"
+                    size="icon"
+                    className={`h-2 w-2 rounded-full p-0 bg-primary/40 ${index === current ? 'opacity-100 bg-primary' : 'opacity-50'}`}
+                    onClick={() => api?.scrollTo(index)}
+                  />
+                ))}
+              </div>
+
+              <CarouselNext 
+                variant="outline" 
+                className="relative bg-primary text-white hover:bg-primary/90 border-none right-0 translate-y-0 static" 
+              >
+                <ChevronRight className="h-5 w-5" />
+              </CarouselNext>
+            </div>
+          </Carousel>
         </div>
 
         {/* Mobile View - Carousel */}
