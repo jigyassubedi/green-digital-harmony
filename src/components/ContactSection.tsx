@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
@@ -9,50 +8,63 @@ const ContactSection: React.FC = () => {
     email: '',
     message: ''
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState(prev => ({ ...prev, [name]: value }));
   };
-  
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+
+    const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSeHFkrvVhhuhpCEMwTy3svxxWKJbN3ccBRekW5QGa37LEdnHg/formResponse";
+
+    // Google Form field entry IDs (replace with your actual field entry IDs)
+    const formData = new FormData();
+    formData.append("entry.545678361", formState.name); // Replace "entry.123456" with the actual field name for the name
+    formData.append("entry.1852633169", formState.email); // Replace "entry.7891011" with the actual field name for the email
+    formData.append("entry.1484772172", formState.message); // Replace "entry.112233" with the actual field name for the message
+
+    try {
+      await fetch(googleFormURL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors", // Required to bypass CORS issue
+      });
+
+      // Assume success since Google Forms doesn't return a response
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormState({ name: '', email: '', message: '' });
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
-    }, 1500);
+    } catch (error) {
+      console.error("Error submitting the form", error);
+      setIsSubmitting(false);
+    }
   };
-  
+
   return (
     <section id="contact" className="py-4 bg-background">
       <div className="section-container">
         <AnimatedSection className="text-center mb-2">
-        <div className="flex justify-center items-center w-full mb-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
-           Get In Touch
-          </h1>
-        </div>
-          
-          {/* <h2 className="section-title">
-            Let's Create a Greener Digital Future Together
-          </h2> */}
+          <div className="flex justify-center items-center w-full mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
+              Get In Touch
+            </h1>
+          </div>
           <p className="section-subtitle mx-auto max-w-3xl">
             Have questions about our sustainable IT solutions? Want to learn how we can help your business reduce its carbon footprint? Reach out to us today.
           </p>
         </AnimatedSection>
-        
+
         <div className="grid lg:grid-cols-5 gap-12">
           <AnimatedSection className="lg:col-span-3">
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
@@ -129,7 +141,7 @@ const ContactSection: React.FC = () => {
               )}
             </form>
           </AnimatedSection>
-          
+
           <AnimatedSection className="lg:col-span-2 space-y-8">
             <div>
               <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
@@ -152,31 +164,7 @@ const ContactSection: React.FC = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex">
-                  <MapPin className="w-5 h-5 text-primary mr-3 flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-medium">Our Location</p>
-                    <p className="text-muted-foreground">
-                      Buddhanagar, Kathmandu
-                    </p>
-                  </div>
-                </div>
               </div>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Office Hours</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li className="flex justify-between">
-                  <span>Sunday - Friday</span>
-                  <span>10:00 AM - 5:00 PM</span>
-                </li>
-                
-                <li className="flex justify-between">
-                  <span>Saturday</span>
-                  <span>Closed</span>
-                </li>
-              </ul>
             </div>
           </AnimatedSection>
         </div>

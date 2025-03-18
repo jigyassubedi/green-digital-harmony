@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { Server, Cloud, HardDrive, Cpu, Shield, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import { Button } from '@/components/ui/button';
 import { 
   Carousel, 
+  CarouselApi, 
   CarouselContent, 
   CarouselItem, 
   CarouselNext, 
@@ -51,7 +51,8 @@ const services = [
 ];
 
 const ServicesSection: React.FC = () => {
-  const [api, setApi] = React.useState(null);
+  const [api, setApi] = React.useState<CarouselApi | null>(null);
+
   const [current, setCurrent] = React.useState(0);
 
   React.useEffect(() => {
@@ -95,142 +96,75 @@ const ServicesSection: React.FC = () => {
           </p>
         </AnimatedSection>
 
-        {/* Desktop View - Carousel */}
-        <div className="hidden md:block">
-          <Carousel 
-            setApi={setApi}
-            className="w-full"
-            opts={{ 
-              loop: true, 
-              align: "start",
-              slidesToScroll: 3,
-            }}
-          >
-            <CarouselContent>
-              {services.map((service, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
-                  <AnimatedSection 
-                    delay={index * 100}
-                    className={`rounded-lg p-6 shadow-md card-hover h-full ${service.gradient} backdrop-blur-sm border border-white/10`}
-                  >
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4">
-                      <service.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-foreground">{service.title}</h3>
-                    <p className="text-muted-foreground mb-4">{service.description}</p>
-                    <a 
-                      href="#contact" 
-                      className="text-primary font-medium inline-flex items-center hover:underline group"
-                    >
-                      Learn More
-                      <svg 
-                        className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </a>
-                  </AnimatedSection>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-
-            <div className="flex items-center justify-center gap-4 mt-6">
-              <CarouselPrevious 
-                variant="outline" 
-                className="relative bg-primary text-white hover:bg-primary/90 border-none left-0 translate-y-0 static"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </CarouselPrevious>
-
-              <div className="flex gap-2 items-center">
-                {Array.from({ length: Math.ceil(services.length / 3) }).map((_, index) => (
-                  <button 
-                    key={index}
-                    type="button"
-                    onClick={() => api?.scrollTo(index * 3)}
-                    className={`h-2 w-2 rounded-full ${current === index * 3 || current === index * 3 + 1 || current === index * 3 + 2 ? 'bg-primary' : 'bg-primary/40'}`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              <CarouselNext 
-                variant="outline" 
-                className="relative bg-primary text-white hover:bg-primary/90 border-none right-0 translate-y-0 static" 
-              >
-                <ChevronRight className="h-5 w-5" />
-              </CarouselNext>
-            </div>
-          </Carousel>
-        </div>
-
-        {/* Mobile View - Carousel */}
-        <div className="md:hidden">
-          <Carousel 
-            setApi={setApi}
-            className="w-full max-w-md mx-auto"
-            opts={{ loop: true, align: "center" }}
-          >
-            <CarouselContent>
-              {services.map((service, index) => (
-                <CarouselItem key={index} className="basis-full">
-                  <div className={`rounded-lg p-6 shadow-md h-full flex flex-col ${service.gradient} backdrop-blur-sm border border-white/10`}>
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4">
-                      <service.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-foreground">{service.title}</h3>
-                    <p className="text-muted-foreground mb-4">{service.description}</p>
-                    <a 
-                      href="#contact" 
-                      className="text-primary font-medium inline-flex items-center hover:underline group mt-auto"
-                    >
-                      Learn More
-                      <svg 
-                        className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </a>
+        {/* Unified Carousel for Both Desktop & Mobile */}
+        <Carousel 
+          setApi={setApi}
+          className="w-full"
+          opts={{ 
+            loop: true, 
+            align: "start",
+            slidesToScroll: 1, // Scroll 1 at a time for consistency
+          }}
+        >
+          <CarouselContent>
+            {services.map((service, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 basis-full pl-4">
+                <AnimatedSection 
+                  delay={index * 100}
+                  className={`rounded-lg p-6 shadow-md card-hover h-full ${service.gradient} backdrop-blur-sm border border-white/10`}
+                >
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4">
+                    <service.icon className="w-6 h-6 text-primary" />
                   </div>
-                </CarouselItem>
+                  <h3 className="text-xl font-semibold mb-3 text-foreground">{service.title}</h3>
+                  <p className="text-muted-foreground mb-4">{service.description}</p>
+                  <a 
+                    href="#contact" 
+                    className="text-primary font-medium inline-flex items-center hover:underline group"
+                  >
+                    Learn More
+                    <svg 
+                      className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </AnimatedSection>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <CarouselPrevious 
+              variant="outline" 
+              className="relative bg-primary text-white hover:bg-primary/90 border-none left-0 translate-y-0 static"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </CarouselPrevious>
+
+            <div className="flex gap-2 items-center">
+              {services.map((_, index) => (
+                <button 
+                  key={index}
+                  type="button"
+                  onClick={() => api?.scrollTo(index)}
+                  className={`h-2 w-2 rounded-full ${current === index ? 'bg-primary' : 'bg-primary/40'}`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
               ))}
-            </CarouselContent>
-
-            <div className="flex items-center justify-center gap-4 mt-6">
-              <CarouselPrevious 
-                variant="outline" 
-                className="relative bg-primary text-white hover:bg-primary/90 border-none left-0 translate-y-0 static"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </CarouselPrevious>
-
-              <div className="flex gap-2 items-center">
-                {services.map((_, index) => (
-                  <button 
-                    key={index}
-                    type="button"
-                    onClick={() => api?.scrollTo(index)}
-                    className={`h-2 w-2 rounded-full ${current === index ? 'bg-primary' : 'bg-primary/40'}`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              <CarouselNext 
-                variant="outline" 
-                className="relative bg-primary text-white hover:bg-primary/90 border-none right-0 translate-y-0 static" 
-              >
-                <ChevronRight className="h-5 w-5" />
-              </CarouselNext>
             </div>
-          </Carousel>
-        </div>
+
+            <CarouselNext 
+              variant="outline" 
+              className="relative bg-primary text-white hover:bg-primary/90 border-none right-0 translate-y-0 static" 
+            >
+              <ChevronRight className="h-5 w-5" />
+            </CarouselNext>
+          </div>
+        </Carousel>
       </div>
     </section>
   );
