@@ -138,8 +138,8 @@ const ContactSection: React.FC = () => {
                   <Mail className="w-5 h-5 text-primary mr-3 flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-medium">Email Us</p>
-                    <a href="mailto:info@greenit.com" className="text-muted-foreground hover:text-primary">
-                      info@greenit.com
+                    <a href="mailto:qualitypractices@outlook.com" className="text-muted-foreground hover:text-primary">
+                      qualitypractices@outlook.com
                     </a>
                   </div>
                 </div>
@@ -147,8 +147,8 @@ const ContactSection: React.FC = () => {
                   <Phone className="w-5 h-5 text-primary mr-3 flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-medium">Call Us</p>
-                    <a href="tel:+11234567890" className="text-muted-foreground hover:text-primary">
-                      +1 (123) 456-7890
+                    <a href="tel:+9779851444440" className="text-muted-foreground hover:text-primary">
+                      +977 985 144 4440
                     </a>
                   </div>
                 </div>
@@ -157,8 +157,7 @@ const ContactSection: React.FC = () => {
                   <div>
                     <p className="font-medium">Our Location</p>
                     <p className="text-muted-foreground">
-                      123 Green Avenue, Eco Park<br />
-                      San Francisco, CA 94107
+                      Buddhanagar, Kathmandu
                     </p>
                   </div>
                 </div>
@@ -169,15 +168,12 @@ const ContactSection: React.FC = () => {
               <h3 className="text-xl font-semibold mb-4">Office Hours</h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span>9:00 AM - 6:00 PM</span>
+                  <span>Sunday - Friday</span>
+                  <span>10:00 AM - 5:00 PM</span>
                 </li>
+                
                 <li className="flex justify-between">
                   <span>Saturday</span>
-                  <span>10:00 AM - 4:00 PM</span>
-                </li>
-                <li className="flex justify-between">
-                  <span>Sunday</span>
                   <span>Closed</span>
                 </li>
               </ul>
