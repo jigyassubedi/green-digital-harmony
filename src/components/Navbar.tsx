@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
 import { Menu, X } from 'lucide-react';
@@ -56,7 +57,8 @@ const Navbar: React.FC = () => {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white shadow-md py-3"
+        "fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white shadow-md py-3",
+        isMobile && "py-2" // Reduced padding for mobile view
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +68,14 @@ const Navbar: React.FC = () => {
             href="#hero" 
             className="flex items-center text-primary font-bold text-xl"
           >
-            <img src="/qpr-logo-nav.png" alt="Company Logo" className="w-16 h-16 mr-2" />
+            <img 
+              src="/qpr-logo-nav.png" 
+              alt="Company Logo" 
+              className={cn(
+                "mr-2",
+                isMobile ? "w-12 h-12" : "w-16 h-16" // Smaller logo for mobile
+              )} 
+            />
           </a>
           
           {/* Desktop Navigation */}
@@ -97,8 +106,9 @@ const Navbar: React.FC = () => {
       {/* Mobile Navigation */}
       <div 
         className={cn(
-          "md:hidden fixed top-0 right-0 z-[60] h-full w-[40%] bg-white shadow-lg transition-all duration-300 ease-in-out",
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
+          "md:hidden fixed top-0 right-0 z-[60] h-full bg-white shadow-lg transition-all duration-300 ease-in-out",
+          isMenuOpen ? "translate-x-0" : "translate-x-full",
+          "w-[50%]" // Increased width to almost half of screen
         )}
       >
         <div className="pt-24 px-4">
