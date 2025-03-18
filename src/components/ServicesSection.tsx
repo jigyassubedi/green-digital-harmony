@@ -53,7 +53,10 @@ const services = [
 const ServicesSection: React.FC = () => {
   const [api, setApi] = React.useState<any>(null);
   const [current, setCurrent] = React.useState(0);
+  const [desktopApi, setDesktopApi] = React.useState<any>(null);
+  const [desktopCurrent, setDesktopCurrent] = React.useState(0);
 
+  // For mobile carousel
   React.useEffect(() => {
     if (!api) return;
     
@@ -70,7 +73,24 @@ const ServicesSection: React.FC = () => {
     };
   }, [api]);
   
-  // Auto-play functionality
+  // For desktop carousel
+  React.useEffect(() => {
+    if (!desktopApi) return;
+    
+    const onSelect = () => {
+      setDesktopCurrent(desktopApi.selectedScrollSnap());
+    };
+    
+    desktopApi.on("select", onSelect);
+    desktopApi.on("reInit", onSelect);
+    
+    return () => {
+      desktopApi.off("select", onSelect);
+      desktopApi.off("reInit", onSelect);
+    };
+  }, [desktopApi]);
+  
+  // Auto-play functionality for mobile
   React.useEffect(() => {
     if (!api) return;
     
@@ -80,6 +100,20 @@ const ServicesSection: React.FC = () => {
     
     return () => clearInterval(interval);
   }, [api]);
+  
+  // Auto-play functionality for desktop
+  React.useEffect(() => {
+    if (!desktopApi) return;
+    
+    const interval = setInterval(() => {
+      desktopApi.scrollNext();
+    }, 5000); // Change slide every 5 seconds
+    
+    return () => clearInterval(interval);
+  }, [desktopApi]);
+  
+  // Calculate the number of pages for desktop (showing 3 slides per page)
+  const desktopSlideCount = Math.ceil(services.length / 3);
   
   return (
     <section id="services" className="py-4 bg-accent/30">
@@ -98,7 +132,7 @@ const ServicesSection: React.FC = () => {
         {/* Desktop View - Carousel */}
         <div className="hidden md:block">
           <Carousel 
-            setApi={setApi}
+            setApi={setDesktopApi}
             className="w-full"
             opts={{ 
               loop: true, 
@@ -146,17 +180,17 @@ const ServicesSection: React.FC = () => {
               </CarouselPrevious>
 
               <div className="flex gap-2 items-center">
-                {Array.from({ length: Math.ceil(services.length / 3) }).map((_, index) => {
-                  // Calculate if this indicator should be active based on current position
-                  const isActive = Math.floor(current / 3) === index;
+                {Array.from({ length: desktopSlideCount }).map((_, index) => {
+                  // Use correct index calculation: this is one item per "page" of 3 slides
+                  const isActive = Math.floor(desktopCurrent / 3) === index;
                   
                   return (
                     <button 
                       key={index}
                       type="button"
-                      onClick={() => api?.scrollTo(index * 3)}
+                      onClick={() => desktopApi?.scrollTo(index * 3)}
                       className={`h-2 w-2 rounded-full ${isActive ? 'bg-primary' : 'bg-primary/40'}`}
-                      aria-label={`Go to slide ${index + 1}`}
+                      aria-label={`Go to slide page ${index + 1}`}
                     />
                   );
                 })}
