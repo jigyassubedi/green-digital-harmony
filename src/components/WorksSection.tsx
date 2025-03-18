@@ -45,7 +45,7 @@ const WorksSection: React.FC = () => {
   const [activeProject, setActiveProject] = useState<number | null>(null);
   
   return (
-    <section id="works" className="py-10 bg-background">
+    <section id="works" className="py-4 bg-background">
       <div className="section-container">
       <div className="flex justify-center items-center w-full mb-4">
           <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">

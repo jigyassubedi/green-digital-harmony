@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
 import { Menu, X } from 'lucide-react';
@@ -40,14 +39,15 @@ const Navbar: React.FC = () => {
     };
   }, [isMenuOpen, isMobile]);
 
-  // Smooth scrolling function
+  // Smooth scrolling function with dynamic offset based on device
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace("#", "");
     const targetElement = document.getElementById(targetId);
 
     if (targetElement) {
-      const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 80; // Adjust for navbar height
+      const navbarHeight = isMobile ? 40 : 60; // Adjusted for mobile and desktop height
+      const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
       window.scrollTo({ top: offsetTop, behavior: "smooth" });
     }
     
