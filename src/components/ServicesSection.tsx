@@ -112,8 +112,12 @@ const ServicesSection: React.FC = () => {
     return () => clearInterval(interval);
   }, [desktopApi]);
   
-  // Calculate the number of pages for desktop (showing 3 slides per page)
-  const desktopSlideCount = Math.ceil(services.length / 3);
+  // Calculate the number of pages for desktop (showing 3 items per page)
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(services.length / itemsPerPage);
+  
+  // Function to determine which page is active based on current slide index
+  const getActivePage = (currentIndex: number) => Math.floor(currentIndex / itemsPerPage);
   
   return (
     <section id="services" className="py-4 bg-accent/30">
@@ -137,7 +141,7 @@ const ServicesSection: React.FC = () => {
             opts={{ 
               loop: true, 
               align: "start",
-              slidesToScroll: 3,
+              slidesToScroll: itemsPerPage,
             }}
           >
             <CarouselContent>
@@ -180,17 +184,17 @@ const ServicesSection: React.FC = () => {
               </CarouselPrevious>
 
               <div className="flex gap-2 items-center">
-                {Array.from({ length: desktopSlideCount }).map((_, index) => {
-                  // Use correct index calculation: this is one item per "page" of 3 slides
-                  const isActive = Math.floor(desktopCurrent / 3) === index;
+                {Array.from({ length: totalPages }).map((_, index) => {
+                  const activePage = getActivePage(desktopCurrent);
+                  const isActive = activePage === index;
                   
                   return (
                     <button 
                       key={index}
                       type="button"
-                      onClick={() => desktopApi?.scrollTo(index * 3)}
+                      onClick={() => desktopApi?.scrollTo(index * itemsPerPage)}
                       className={`h-2 w-2 rounded-full ${isActive ? 'bg-primary' : 'bg-primary/40'}`}
-                      aria-label={`Go to slide page ${index + 1}`}
+                      aria-label={`Go to slide group ${index + 1}`}
                     />
                   );
                 })}
