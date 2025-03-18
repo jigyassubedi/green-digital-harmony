@@ -146,15 +146,20 @@ const ServicesSection: React.FC = () => {
               </CarouselPrevious>
 
               <div className="flex gap-2 items-center">
-                {Array.from({ length: Math.ceil(services.length / 3) }).map((_, index) => (
-                  <button 
-                    key={index}
-                    type="button"
-                    onClick={() => api?.scrollTo(index * 3)}
-                    className={`h-2 w-2 rounded-full ${current === index * 3 || current === index * 3 + 1 || current === index * 3 + 2 ? 'bg-primary' : 'bg-primary/40'}`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
+                {Array.from({ length: Math.ceil(services.length / 3) }).map((_, index) => {
+                  // Calculate if this indicator should be active based on current position
+                  const isActive = Math.floor(current / 3) === index;
+                  
+                  return (
+                    <button 
+                      key={index}
+                      type="button"
+                      onClick={() => api?.scrollTo(index * 3)}
+                      className={`h-2 w-2 rounded-full ${isActive ? 'bg-primary' : 'bg-primary/40'}`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  );
+                })}
               </div>
 
               <CarouselNext 
