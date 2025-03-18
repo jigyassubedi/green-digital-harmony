@@ -4,7 +4,6 @@ import AnimatedSection from './AnimatedSection';
 import { Button } from '@/components/ui/button';
 import { 
   Carousel, 
-  CarouselApi, 
   CarouselContent, 
   CarouselItem, 
   CarouselNext, 
@@ -15,44 +14,37 @@ const services = [
   {
     title: 'Green Data Centers',
     description: 'Eco-friendly data centers powered by renewable energy sources, designed to minimize environmental impact while maximizing performance.',
-    icon: Server,
-    gradient: 'bg-gradient-to-r from-primary/5 to-primary/20'
+    icon: Server
   },
   {
     title: 'Cloud Computing & Energy Efficiency',
     description: 'Optimized cloud solutions that reduce energy consumption and carbon emissions while enhancing scalability and accessibility.',
-    icon: Cloud,
-    gradient: 'bg-gradient-to-r from-primary/10 to-primary/25'
+    icon: Cloud
   },
   {
     title: 'Sustainable IT Infrastructure',
     description: 'End-to-end IT infrastructure designed with sustainability in mind, from energy-efficient hardware to optimized network architecture.',
-    icon: HardDrive,
-    gradient: 'bg-gradient-to-r from-primary/15 to-primary/30'
+    icon: HardDrive
   },
   {
     title: 'AI & Automation for Energy Management',
     description: 'Smart systems that leverage AI to monitor and optimize energy usage in real-time, reducing waste and improving efficiency.',
-    icon: Cpu,
-    gradient: 'bg-gradient-to-r from-primary/20 to-primary/35'
+    icon: Cpu
   },
   {
     title: 'Cybersecurity & Eco-friendly Solutions',
     description: 'Comprehensive security solutions that protect your digital assets while adhering to sustainable IT practices.',
-    icon: Shield,
-    gradient: 'bg-gradient-to-r from-primary/15 to-primary/30'
+    icon: Shield
   },
   {
     title: 'Green IT Consulting',
     description: 'Expert guidance on implementing sustainable technology strategies that align with your business goals and environmental values.',
-    icon: Lightbulb,
-    gradient: 'bg-gradient-to-r from-primary/10 to-primary/25'
+    icon: Lightbulb
   }
 ];
 
 const ServicesSection: React.FC = () => {
-  const [api, setApi] = React.useState<CarouselApi | null>(null);
-
+  const [api, setApi] = React.useState(null);
   const [current, setCurrent] = React.useState(0);
 
   React.useEffect(() => {
@@ -106,12 +98,14 @@ const ServicesSection: React.FC = () => {
             slidesToScroll: 1, // Scroll 1 at a time for consistency
           }}
         >
-          <CarouselContent>
+          <CarouselContent className="flex -mx-2">
             {services.map((service, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 basis-full pl-4">
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 basis-full">
                 <AnimatedSection 
                   delay={index * 100}
-                  className={`rounded-lg p-6 shadow-md card-hover h-full ${service.gradient} backdrop-blur-sm border border-white/10`}
+                  className="rounded-lg p-6 shadow-md card-hover h-full 
+                             bg-gradient-to-r from-primary/10 to-primary/40 
+                             backdrop-blur-sm border-none overflow-hidden"
                 >
                   <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4">
                     <service.icon className="w-6 h-6 text-primary" />
