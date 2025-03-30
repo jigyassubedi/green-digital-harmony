@@ -25,7 +25,7 @@ const HeroSection: React.FC = () => {
   return (
     <section 
       id="hero" 
-      className="min-h-screen flex items-center justify-center relative bg-gradient-to-b from-accent/50 to-background overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative bg-gradient-to-r from-accent/50 to-background/50 overflow-hidden" // Changed gradient direction
       style={{
         backgroundImage: 'url(https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80)',
         backgroundSize: 'cover',
@@ -34,7 +34,7 @@ const HeroSection: React.FC = () => {
       }}
     >
       {/* Animated circles in background */}
-      <div className="absolute inset-0 overflow-hidden bg-gradient-to-b from-primary/90 to-background/90 bg-blend-overlay">
+      <div className="absolute inset-0 overflow-hidden bg-gradient-to-l from-primary/90 to-background/90 bg-blend-overlay"> {/* Updated gradient direction here as well */}
         <div className="absolute -top-20 -left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-ping-slow"></div>
         <div className="absolute top-1/3 -right-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-ping-slow" style={{ animationDelay: '1s' }}></div>
       </div>

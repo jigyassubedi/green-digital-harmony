@@ -47,16 +47,20 @@ const AboutSection: React.FC = () => {
               {/* <h2 className="section-title">
                 Leading the Way in <span className="text-primary">Sustainable IT</span>
               </h2> */}
-              <p className="section-subtitle">
+              {/*<p className="section-subtitle">
                 We are committed to revolutionizing the IT industry by integrating clean energy solutions with cutting-edge technology. Our mission is to help businesses reduce their carbon footprint while optimizing digital performance.
+              </p>*/}
+              <p className="section-subtitle">
+              At QPr, we are committed to driving innovation and sustainability through our comprehensive IT services and biogas solutions. With a passion for delivering exceptional results, we work with businesses across various industries to enhance their operations, reduce environmental impact, and embrace the power of technology and renewable energy.
+
+
               </p>
-              
               <div className="space-y-4 mb-8">
                 {[
-                  'Eco-friendly data center solutions',
-                  'Renewable energy powered cloud services',
-                  'Energy-efficient IT infrastructure design',
-                  'Sustainable digital transformation strategies'
+                  'Advanced Data Feeding Solutions for E-commerce Platforms',
+                  'Cutting-edge Biogas Technology for Renewable Energy',
+                  'Comprehensive Business Enablement & Support Services',
+                  'Strategic Sustainable Digital Transformation'
                 ].map((item, index) => (
                   <div key={index} className="flex items-start">
                     <CheckCircle className="w-6 h-6 text-primary mr-3 flex-shrink-0 mt-0.5" />

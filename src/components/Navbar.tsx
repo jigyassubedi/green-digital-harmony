@@ -6,7 +6,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
-  { label: 'Works', href: '#works' },
   { label: 'Blog', href: '#blog' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -57,11 +56,20 @@ const Navbar: React.FC = () => {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white shadow-md py-3",
+        "fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3",
+        isScrolled 
+          ? "bg-white shadow-lg" // Add shadow when scrolled
+          : "bg-transparent",
         isMobile && "py-2" // Reduced padding for mobile view
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Gradient background (for non-sticky state) */}
+      <div className={cn(
+        "absolute inset-0 overflow-hidden ",
+        isScrolled && "hidden" // Hide the gradient when scrolled
+      )} />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Server, Cloud, HardDrive, Cpu, Shield, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Sprout, LeafyGreen, ChevronLeft, ChevronRight,Database,Cpu  } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import { Button } from '@/components/ui/button';
 import { 
@@ -12,34 +12,24 @@ import {
 
 const services = [
   {
-    title: 'Green Data Centers',
-    description: 'Eco-friendly data centers powered by renewable energy sources, designed to minimize environmental impact while maximizing performance.',
-    icon: Server
+    title: 'Biogas Solutions',
+    description: 'We are committed to supporting sustainability and environmental stewardship through innovative biogas solutions. Our biogas systems offer a renewable energy source that helps reduce waste, lower carbon emissions, and generate clean energy.',
+    icon: Sprout
   },
   {
-    title: 'Cloud Computing & Energy Efficiency',
-    description: 'Optimized cloud solutions that reduce energy consumption and carbon emissions while enhancing scalability and accessibility.',
-    icon: Cloud
+    title: 'Data Feeding Services',
+    description: 'Data is the backbone of decision-making in modern businesses. Our Data Feeding Services help you gather, process, and utilize data effectively to enhance operations, improve analytics, and drive better business outcomes.',
+    icon: Database 
   },
   {
-    title: 'Sustainable IT Infrastructure',
-    description: 'End-to-end IT infrastructure designed with sustainability in mind, from energy-efficient hardware to optimized network architecture.',
-    icon: HardDrive
-  },
-  {
-    title: 'AI & Automation for Energy Management',
-    description: 'Smart systems that leverage AI to monitor and optimize energy usage in real-time, reducing waste and improving efficiency.',
+    title: 'IT Services',
+    description: 'We provide a comprehensive suite of IT services that support your business at every stage of its digital transformation. Our solutions are designed to streamline operations, enhance user experiences, and ensure a robust and secure IT infrastructure.',
     icon: Cpu
-  },
-  {
-    title: 'Cybersecurity & Eco-friendly Solutions',
-    description: 'Comprehensive security solutions that protect your digital assets while adhering to sustainable IT practices.',
-    icon: Shield
   },
   {
     title: 'Green IT Consulting',
     description: 'Expert guidance on implementing sustainable technology strategies that align with your business goals and environmental values.',
-    icon: Lightbulb
+    icon: LeafyGreen
   }
 ];
 
@@ -112,7 +102,7 @@ const ServicesSection: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-semibold mb-3 text-foreground">{service.title}</h3>
                   <p className="text-muted-foreground mb-4">{service.description}</p>
-                  <a 
+                  {/* <a 
                     href="#contact" 
                     className="text-primary font-medium inline-flex items-center hover:underline group"
                   >
@@ -125,7 +115,7 @@ const ServicesSection: React.FC = () => {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </a> */}
                 </AnimatedSection>
               </CarouselItem>
             ))}
