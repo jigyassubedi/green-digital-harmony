@@ -1,13 +1,15 @@
+
 import React, { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
 import { Menu, X } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Link } from 'react-router-dom';
 
 const navItems = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 const Navbar: React.FC = () => {
@@ -40,17 +42,23 @@ const Navbar: React.FC = () => {
 
   // Smooth scrolling function with dynamic offset based on device
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.replace("#", "");
-    const targetElement = document.getElementById(targetId);
+    // Only use custom scroll for hash links (on the same page)
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.replace("#", "");
+      const targetElement = document.getElementById(targetId);
 
-    if (targetElement) {
-      const navbarHeight = isMobile ? 40 : 60; // Adjusted for mobile and desktop height
-      const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
-      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      if (targetElement) {
+        const navbarHeight = isMobile ? 40 : 60; // Adjusted for mobile and desktop height
+        const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
+        window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      }
+      
+      setIsMenuOpen(false); // Close menu after clicking
+    } else {
+      // For regular links, just close the menu
+      setIsMenuOpen(false);
     }
-    
-    setIsMenuOpen(false); // Close menu after clicking
   };
 
   return (
@@ -72,8 +80,8 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a 
-            href="#hero" 
+          <Link 
+            to="/" 
             className="flex items-center text-primary font-bold text-xl"
           >
             <img 
@@ -84,19 +92,30 @@ const Navbar: React.FC = () => {
                 isMobile ? "w-12 h-12" : "w-16 h-16" // Smaller logo for mobile
               )} 
             />
-          </a>
+          </Link>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-foreground hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-                onClick={(e) => handleNavClick(e, item.href)}
-              >
-                {item.label}
-              </a>
+              item.href.startsWith('/#') ? (
+                <a
+                  key={item.label}
+                  href={item.href.replace('/', '')}
+                  className="text-foreground hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                  onClick={(e) => handleNavClick(e, item.href.replace('/', ''))}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="text-foreground hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
           </nav>
           
@@ -122,14 +141,25 @@ const Navbar: React.FC = () => {
         <div className="pt-24 px-4">
           <nav className="flex flex-col items-start space-y-6">
             {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                onClick={(e) => handleNavClick(e, item.href)}
-              >
-                {item.label}
-              </a>
+              item.href.startsWith('/#') ? (
+                <a
+                  key={item.label}
+                  href={item.href.replace('/', '')}
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                  onClick={(e) => handleNavClick(e, item.href.replace('/', ''))}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
           </nav>
         </div>

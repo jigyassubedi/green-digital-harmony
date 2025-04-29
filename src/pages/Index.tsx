@@ -17,7 +17,7 @@ const Index: React.FC = () => {
       
       const anchor = this as HTMLAnchorElement;
       const href = anchor.getAttribute('href');
-      if (!href) return;
+      if (!href || !href.startsWith('#')) return;
       
       const target = document.querySelector(href);
       if (!target) return;
