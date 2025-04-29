@@ -1,15 +1,17 @@
 
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
-import WorksSection from '@/components/WorksSection';
 import BlogSection from '@/components/BlogSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
 const Index: React.FC = () => {
+  const location = useLocation();
+
   // Handle smooth scroll for navigation
   useEffect(() => {
     const handleClick = function(e: Event) {
@@ -31,12 +33,17 @@ const Index: React.FC = () => {
       anchor.addEventListener('click', handleClick);
     });
     
+    // Scroll to top on initial load
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+    }
+    
     return () => {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.removeEventListener('click', handleClick);
       });
     };
-  }, []);
+  }, [location]);
   
   return (
     <div className="min-h-screen bg-background">
@@ -45,7 +52,6 @@ const Index: React.FC = () => {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
-        {/* <WorksSection /> */}
         <BlogSection />
         <ContactSection />
       </main>
