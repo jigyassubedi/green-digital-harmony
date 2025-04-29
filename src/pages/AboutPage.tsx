@@ -1,10 +1,12 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import DirectorMessage from '@/components/DirectorMessage';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AnimatedSection from '@/components/AnimatedSection';
+import { aboutSections } from '@/data/aboutData';
 
 const AboutPage: React.FC = () => {
   return (
@@ -41,6 +43,24 @@ const AboutPage: React.FC = () => {
                     <p className="text-lg mb-4">
                       Our founders, a diverse team of experts from IT infrastructure, renewable energy, and business development backgrounds, came together with a shared vision. They wanted to create a company that would not only provide top-tier IT services but would do so in a way that prioritizes environmental responsibility and sustainability.
                     </p>
+                    <Link 
+                      to="/about/company" 
+                      className="text-primary font-medium hover:underline inline-flex items-center"
+                    >
+                      Read More
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="w-5 h-5 ml-1"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </Link>
                   </div>
                   <div className="rounded-lg overflow-hidden shadow-lg">
                     <img 
@@ -118,6 +138,26 @@ const AboutPage: React.FC = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+                <div className="mt-8 text-center">
+                  <Link 
+                    to="/about/team" 
+                    className="text-primary font-medium hover:underline inline-flex items-center"
+                  >
+                    Learn More About Our Team
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-5 h-5 ml-1"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </Link>
                 </div>
               </AnimatedSection>
             </TabsContent>

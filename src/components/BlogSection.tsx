@@ -1,96 +1,81 @@
 
 import React from 'react';
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import { Calendar, User } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import AnimatedSection from './AnimatedSection';
-
-const blogs = [
-  {
-    title: 'The Future of Green Computing: Trends to Watch',
-    excerpt: 'Explore emerging technologies that are making IT infrastructure more sustainable and energy efficient.',
-    date: 'Oct 12, 2023',
-    author: 'Emma Green',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80'
-  },
-  {
-    title: 'How AI is Optimizing Energy Usage in Modern Data Centers',
-    excerpt: 'Artificial intelligence is revolutionizing how data centers manage power consumption and cooling systems.',
-    date: 'Sep 28, 2023',
-    author: 'David Tech',
-    image: 'https://images.unsplash.com/photo-1607292798090-a143ee885830?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80'
-  },
-  {
-    title: 'Case Study: Reducing Carbon Footprint Through Smart IT Choices',
-    excerpt: 'Learn how one company decreased their emissions by 75% through strategic technology investments.',
-    date: 'Sep 15, 2023',
-    author: 'Sarah Miller',
-    image: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80'
-  }
-];
+import { blogPosts } from '@/data/blogData';
 
 const BlogSection: React.FC = () => {
+  // Display only the latest 3 blog posts
+  const latestPosts = blogPosts.slice(0, 3);
+  
   return (
-    <section id="blog" className="py-4 bg-accent/30">
-      <div className="section-container">
-      <div className="flex justify-center items-center w-full mb-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary uppercase tracking-wider text-center">
-           Our Blog
-          </h1>
-        </div>
-        <AnimatedSection className="text-center mb-8">
-          
-          {/* <h2 className="section-title">
-            Latest Insights & Trends
-          </h2> */}
-          <p className="section-subtitle mx-auto max-w-3xl">
-            Stay updated with the latest news and insights in sustainable IT and green energy solutions.
-          </p>
+    <section id="blog" className="py-16 bg-accent/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AnimatedSection>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Latest Insights</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Stay updated with our latest articles and industry insights on sustainable technology and renewable energy solutions.
+            </p>
+          </div>
         </AnimatedSection>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((blog, index) => (
-            <AnimatedSection 
-              key={index} 
-              delay={index * 100}
-              className="bg-white rounded-lg overflow-hidden shadow-md card-hover"
-            >
-              <div className="aspect-video overflow-hidden">
-                <img 
-                  src={blog.image} 
-                  alt={blog.title}
-                  className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex items-center text-xs text-muted-foreground mb-3 space-x-4">
-                  <div className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    {blog.date}
-                  </div>
-                  <div className="flex items-center">
-                    <User className="w-4 h-4 mr-1" />
-                    {blog.author}
-                  </div>
+        <div className="grid md:grid-cols-3 gap-8">
+          {latestPosts.map((post, index) => (
+            <AnimatedSection key={post.id} delay={index * 100}>
+              <Card className="h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <h3 className="text-xl font-semibold mb-3 line-clamp-2">{blog.title}</h3>
-                <p className="text-muted-foreground mb-4 line-clamp-3">{blog.excerpt}</p>
-                <a 
-                  href="#" 
-                  className="text-primary font-medium inline-flex items-center group"
-                >
-                  Read More
-                  <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-                </a>
-              </div>
+                <CardContent className="p-6 flex-grow flex flex-col">
+                  <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-3">
+                    <span className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {post.date}
+                    </span>
+                    <span className="flex items-center">
+                      <User className="w-4 h-4 mr-1" />
+                      {post.author}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                  <p className="text-muted-foreground mb-4 flex-grow">{post.excerpt}</p>
+                  <Link 
+                    to={`/blog/${post.id}`}
+                    className="text-primary font-medium hover:underline inline-flex items-center"
+                  >
+                    Read More
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-5 h-5 ml-1"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </Link>
+                </CardContent>
+              </Card>
             </AnimatedSection>
           ))}
         </div>
         
-        <AnimatedSection className="text-center mt-10">
-          <a href="#" className="btn-secondary">
-            View All Articles
-          </a>
-        </AnimatedSection>
+        <div className="text-center mt-12">
+          <Button asChild variant="outline">
+            <Link to="/blog">View All Articles</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
