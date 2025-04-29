@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
     // Only use custom scroll for hash links (on the same page)
     if (href.startsWith('#')) {
       e.preventDefault();
-      const targetId = href.replace("#", "");
+      const targetId = href.substring(1); // Remove the # character
       const targetElement = document.getElementById(targetId);
 
       if (targetElement) {
@@ -100,9 +100,9 @@ const Navbar: React.FC = () => {
               item.href.startsWith('/#') ? (
                 <a
                   key={item.label}
-                  href={item.href.replace('/', '')}
+                  href={item.href.substring(1)}
                   className="text-foreground hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-                  onClick={(e) => handleNavClick(e, item.href.replace('/', ''))}
+                  onClick={(e) => handleNavClick(e, item.href.substring(1))}
                 >
                   {item.label}
                 </a>
@@ -144,9 +144,9 @@ const Navbar: React.FC = () => {
               item.href.startsWith('/#') ? (
                 <a
                   key={item.label}
-                  href={item.href.replace('/', '')}
+                  href={item.href.substring(1)}
                   className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                  onClick={(e) => handleNavClick(e, item.href.replace('/', ''))}
+                  onClick={(e) => handleNavClick(e, item.href.substring(1))}
                 >
                   {item.label}
                 </a>
