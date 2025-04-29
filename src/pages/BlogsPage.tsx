@@ -122,7 +122,7 @@ const blogPosts = [
   {
     id: 4,
     title: 'Biogas Innovation: Transforming Waste into Valuable Energy',
-    excerpt: 'Explore the latest advancements in biogas technology and how they're creating new opportunities in renewable energy.',
+    excerpt: "Explore the latest advancements in biogas technology and how they're creating new opportunities in renewable energy.",
     content: `
       <p>In the quest for sustainable energy solutions, biogas has emerged as a particularly promising option. Unlike solar or wind energy, biogas technology turns what would otherwise be waste—agricultural residues, food scraps, manure, and more—into valuable energy resources. Recent innovations are making biogas systems more efficient, versatile, and economically viable than ever before.</p>
       
@@ -169,7 +169,7 @@ const blogPosts = [
   {
     id: 5,
     title: 'E-commerce Data Management: Best Practices for 2023',
-    excerpt: 'Key strategies to optimize your product data and drive higher conversions in today\'s competitive online marketplace.',
+    excerpt: "Key strategies to optimize your product data and drive higher conversions in today's competitive online marketplace.",
     content: `
       <p>In the rapidly evolving world of e-commerce, product data has emerged as one of the most critical assets for online retailers. High-quality, well-structured product information doesn't just improve the customer experience—it directly impacts search visibility, conversion rates, and ultimately, your bottom line.</p>
       
