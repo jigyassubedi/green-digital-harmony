@@ -53,6 +53,10 @@ const WorksSection = () => {
           </h1>
         </div>
         <AnimatedSection className="text-center mb-8">
+          
+          {/* <h2 className="section-title">
+            Sustainable Solutions in Action
+          </h2> */}
           <p className="section-subtitle mx-auto max-w-3xl">
             Explore our portfolio of successful implementations that demonstrate the power of green IT solutions in real-world scenarios.
           </p>
