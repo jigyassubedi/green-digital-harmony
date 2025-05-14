@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, User, Tag, Search } from 'lucide-react';
+import { Calendar, User, Search } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import AnimatedSection from '@/components/AnimatedSection';
 import { blogPosts } from '@/data/blogData';
 
-const BlogsPage: React.FC = () => {
+const BlogsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   
   // Get unique categories
   const categories = useMemo(() => {

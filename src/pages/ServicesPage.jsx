@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AnimatedSection from '@/components/AnimatedSection';
 import { Sprout, Database, Cpu, LeafyGreen, ArrowRight, Check } from 'lucide-react';
 
-const ServicesPage: React.FC = () => {
+const ServicesPage = () => {
   const services = [
     {
       id: "biogas",

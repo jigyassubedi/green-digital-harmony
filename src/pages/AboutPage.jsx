@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AnimatedSection from '@/components/AnimatedSection';
 import { aboutSections } from '@/data/aboutData';
 
-const AboutPage: React.FC = () => {
+const AboutPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
