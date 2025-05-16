@@ -166,9 +166,11 @@ const useToast = () => {
 }
 
 // Define toast function that uses the useToast hook
-function toast(props: Omit<ToasterToast, "id" | "open">) {
-  const { toast: toastFn } = useToast()
-  return toastFn(props)
+const toast = (props: Omit<ToasterToast, "id" | "open">) => {
+  // This is just a placeholder function that will be replaced by the actual implementation
+  // in the hooks/use-toast.js file
+  console.warn("Toast function called directly from component. Use from hooks/use-toast instead.")
+  return ""
 }
 
 export { useToast, toast }
