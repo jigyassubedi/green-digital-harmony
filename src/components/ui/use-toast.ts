@@ -1,7 +1,6 @@
 
 // Import the necessary modules from the shadcn/ui toast component
 import * as React from "react"
-import * as ToastPrimitives from "@radix-ui/react-toast"
 
 const TOAST_LIMIT = 5
 const TOAST_REMOVE_DELAY = 1000000
@@ -165,13 +164,5 @@ const useToast = () => {
   }
 }
 
-// Define toast function that uses the useToast hook
-const toast = (props: Omit<ToasterToast, "id" | "open">) => {
-  // This is just a placeholder function that will be replaced by the actual implementation
-  // in the hooks/use-toast.js file
-  console.warn("Toast function called directly from component. Use from hooks/use-toast instead.")
-  return ""
-}
-
-export { useToast, toast }
+export { useToast }
 export type { ToasterToast }

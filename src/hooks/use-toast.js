@@ -1,15 +1,15 @@
 
-// Import the toast functionality from the UI component
+// Import the useToast hook from the UI component
 import { useToast as useToastInternal } from "../components/ui/use-toast";
 
-// Function to use in components
-const useToast = useToastInternal;
+// Re-export the useToast hook
+export const useToast = useToastInternal;
 
-// Function to call directly
-const toast = (props) => {
+// Create a standalone toast function that doesn't create circular dependencies
+export const toast = (props) => {
+  // Get the toast function from the hook
   const { toast: toastFn } = useToastInternal();
+  
+  // Return the result of calling the function
   return toastFn(props);
 };
-
-// Re-export them to make them available to the rest of the app
-export { useToast, toast };
