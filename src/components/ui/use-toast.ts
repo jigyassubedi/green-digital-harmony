@@ -1,17 +1,18 @@
 
 // Import the necessary modules from the shadcn/ui toast component
 import * as React from "react"
-import { useToast as useToastPrimitive } from "@radix-ui/react-toast"
-import { type ToastActionElement, type ToastProps } from "@radix-ui/react-toast"
+import * as ToastPrimitives from "@radix-ui/react-toast"
 
 const TOAST_LIMIT = 5
 const TOAST_REMOVE_DELAY = 1000000
 
-type ToasterToast = ToastProps & {
+type ToasterToast = {
   id: string
   title?: React.ReactNode
   description?: React.ReactNode
-  action?: ToastActionElement
+  action?: React.ReactNode
+  open: boolean
+  variant?: "default" | "destructive"
 }
 
 const actionTypes = {
@@ -19,7 +20,7 @@ const actionTypes = {
   UPDATE_TOAST: "UPDATE_TOAST",
   DISMISS_TOAST: "DISMISS_TOAST",
   REMOVE_TOAST: "REMOVE_TOAST",
-}
+} as const
 
 let count = 0
 
@@ -122,7 +123,7 @@ const useToast = () => {
   }, [state.toasts])
 
   const toast = React.useCallback(
-    (props: Omit<ToasterToast, "id">) => {
+    (props: Omit<ToasterToast, "id" | "open">) => {
       const id = genId()
 
       dispatch({
@@ -164,10 +165,11 @@ const useToast = () => {
   }
 }
 
+// Define toast function that uses the useToast hook
+function toast(props: Omit<ToasterToast, "id" | "open">) {
+  const { toast: toastFn } = useToast()
+  return toastFn(props)
+}
+
 export { useToast, toast }
 export type { ToasterToast }
-
-function toast(props: Omit<ToasterToast, "id">) {
-  const { toast } = useToast()
-  return toast(props)
-}
