@@ -1,5 +1,6 @@
 
-import { useToast as useToastShadcn, toast as toastShadcn } from "../components/ui/use-toast"
+// Import the toast functionality from the UI component
+import { useToast, toast } from "../components/ui/use-toast";
 
-export const useToast = useToastShadcn;
-export const toast = toastShadcn;
+// Re-export them to make them available to the rest of the app
+export { useToast, toast };
